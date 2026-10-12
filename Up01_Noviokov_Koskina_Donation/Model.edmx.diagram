@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b9a238addc4346359fea8b88575a4876" Name="Diagram1">
+      <Diagram DiagramId="6595607b8156486e85a4a951659100b9" Name="Diagram1">
         <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Campaign" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Organization" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />

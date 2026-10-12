@@ -377,7 +377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DB_UP_Donations_PairEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Campaign" EntityType="Self.Campaign" />
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Organization" EntityType="Self.Organization" />
@@ -415,7 +415,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DB_UP_Donations_PairModelContainer" CdmEntityContainer="DB_UP_Donations_PairEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DB_UP_Donations_PairModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Campaign">
             <EntityTypeMapping TypeName="DB_UP_Donations_PairModel.Campaign">
               <MappingFragment StoreEntitySet="Campaign">

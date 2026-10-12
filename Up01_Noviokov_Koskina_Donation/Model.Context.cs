@@ -13,10 +13,10 @@ namespace Up01_Noviokov_Koskina_Donation
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB_UP_Donations_PairEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public DB_UP_Donations_PairEntities()
-            : base("name=DB_UP_Donations_PairEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
