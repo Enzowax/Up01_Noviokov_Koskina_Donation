@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9a238addc4346359fea8b88575a4876" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Campaign" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Organization" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Payment" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.PaymentMethod" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.Report" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_UP_Donations_PairModel.User" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Campaign_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Campaign_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Payment_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Report_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Payment_Method" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_UP_Donations_PairModel.FK_Payment_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
