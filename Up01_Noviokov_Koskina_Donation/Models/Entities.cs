@@ -10,7 +10,7 @@ namespace Up01_Noviokov_Koskina_Donation
     {
         private static Entities _context;
 
-        public static Entities GetCotext()
+        public static Entities GetContext()
         {
             if (_context == null)
                 _context = new Entities();
