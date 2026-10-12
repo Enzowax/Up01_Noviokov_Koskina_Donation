@@ -81,6 +81,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities.cs" />
+    <Compile Include="Models\EntityExtensions.cs" />
     <Compile Include="Organization.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -298,7 +300,6 @@
     <Resource Include="Images\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Styles\" />
   </ItemGroup>
