@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Models\Entities.cs" />
     <Compile Include="Models\EntityExtensions.cs" />
+    <Compile Include="Services\Messages.cs" />
     <Compile Include="Services\Security.cs" />
     <Compile Include="Organization.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -156,6 +157,7 @@
     <Compile Include="Report.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\Session.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
