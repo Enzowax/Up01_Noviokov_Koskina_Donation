@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Models\Entities.cs" />
     <Compile Include="Models\EntityExtensions.cs" />
+    <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\Check.cs" />
     <Compile Include="Services\DataHelper.cs" />
     <Compile Include="Services\InputRules.cs" />

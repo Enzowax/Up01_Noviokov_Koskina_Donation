@@ -6,9 +6,41 @@
       xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AuthPage">
+      Title="Авторизация"
+      Style="{DynamicResource PageStyle}">
 
+    <Border Style="{StaticResource PanelBorder}" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Grid>
-        
+            <StackPanel x:Name="LoginPanel">
+                <TextBlock Text="Вход в систему" Style="{StaticResource TitleText}" HorizontalAlignment="Center"/>
+                <TextBlock Text="Логин" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="LoginBox" MaxLength="50" ToolTip="Логин, указанный при регистрации (латиница, цифры, _)" TextChanged="LoginBox_TextChanged"/>
+                    <TextBlock x:Name="LoginHint" Text="Введите логин" Style="{StaticResource HintText}" />
+                </Grid>
+                <TextBlock Text="Пароль"  Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <PasswordBox x:Name="PasswordBox" MaxLength="50" ToolTip="Пароль учётной записи" PasswordChanged="PasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="PasswordHint" Text="Введите пароль" Style="{StaticResource HintText}"/>
+                </Grid>
+
+                <Button Content="Войти" IsDefault="True" Width="Auto" Margin="5,15,5,5" ToolTip="Войти в систему (Enter)" Click="LoginButton_Click"/>
+                <Button Content="Регистрация" Width="Auto" ToolTip="Создать учетную запись" Click="RegButton_Click"/>
+                <Button Content="Смена пароля" Width="Auto" ToolTip="Изменить пароль учётной записи" Click="ChangePsswordButton_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="CaptchaPanel" Visibility="Collapsed">
+                <TextBlock Text="Подтвердите, что вы не робот" Style="{StaticResource TitleText}" TextWrapping="Wrap" TextAlignment="Center"/>
+                <TextBlock Text="Введите символы с картинки. Заглавные и строчные буквы различаются." TextWrapping="Wrap" Margin="5"/>
+                <Border Width="200" Height="60" Margin="5" HorizontalAlignment="Center" Background="White" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1">
+                    <Canvas x:Name="CaptchCanvas" ClipToBounds="True"/>
+                </Border>
+                <Grid>
+                    <TextBox x:Name="CaptchaBox" MaxLength="5" ToolTip="5 символов с картинки" TextChanged="CaptchaBox_TextChanged"/>
+                    <TextBlock x:Name="CaptchaHint" Text="Символы с картинки" Style="{StaticResource HintText}"/>
+                </Grid>
+                <Button Content="Подтвердить" Width="Auto" Margin="5,15,5,5" ToolTip="Проверить введённые символы" Click="CaptchaCheckButton_Click"/>
+                <Button Content="Другая картинка" Width="Auto" ToolTip="Сгенерировать новую капчу" Click="CaptchaRefreshButton_Click"/>
+            </StackPanel>
     </Grid>
+   </Border>
 </Page>

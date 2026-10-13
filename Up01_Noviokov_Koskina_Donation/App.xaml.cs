@@ -16,7 +16,7 @@ namespace Up01_Noviokov_Koskina_Donation
             var culture = new CultureInfo("ru-Ru");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;   
-            CultureInfo.CurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(culture.IetfLanguageTag)));
         }
 
