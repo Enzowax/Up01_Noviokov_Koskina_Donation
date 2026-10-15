@@ -6,9 +6,24 @@
       xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CampaignsPage">
+      Title="Сборы" Style="{DynamicResource PageStyle}" IsVisibleChanged="Page_IsVisibleChanged">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        
+        <WrapPanel Grid.Row="0">
+            <Grid Width="260">
+                <TextBox x:Name="SearchBox" ToolTip="Поиск по названию сбора" TextChanged="Filter_Changed"/>
+                <TextBlock x:Name="SearchHint" Text="Поиск по названию..." Style="{StaticResource HintText}"/>
+            </Grid>
+            <ComboBox x:Name="StatusFilterBox" Width="170" SelectedIndex="0" ToolTip="Фильтр по статусу" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Все статусы" Tag=""/>
+                <ComboBoxItem Content="Черновик" Tag="Draft"/>
+                <ComboBoxItem Content="Идёт сбор" Tag="Active"/>
+            </ComboBox>
+        </WrapPanel>
     </Grid>
 </Page>

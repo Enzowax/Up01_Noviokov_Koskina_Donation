@@ -24,5 +24,10 @@ namespace Up01_Noviokov_Koskina_Donation.Pages
         {
             InitializeComponent();
         }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
     }
 }
