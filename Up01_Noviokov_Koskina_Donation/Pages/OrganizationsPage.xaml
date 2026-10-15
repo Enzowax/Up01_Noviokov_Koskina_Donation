@@ -6,9 +6,46 @@
       xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OrganizationsPage">
+      Title="Организации" Style="{DynamicResource PageStyle}" IsVisibleChanged="Page_IsVisibleChanged">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        
+        <WrapPanel Grid.Row="0">
+            <Grid Width="300">
+                <TextBox x:Name="SearchBox" ToolTip="Поиск по названию или e-mail" TextChanged="Filter_Changed"/>
+                <TextBlock x:Name="SearchHint" Text="Название или e-mail..." Style="{StaticResource HintText}"/>
+            </Grid>
+            <ComboBox x:Name="SortBox" Width="220" SelectedIndex="0" ToolTip="Порядок сортировки" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="По названию (А-Я)"/>
+                <ComboBoxItem Content="По названию (Я-А)"/>
+                <ComboBoxItem Content="По числу сборов"/>
+            </ComboBox>
+            <CheckBox x:Name="ActiveOnlyBox" Content="Только с активными сборами" ToolTip="Показать организацию, у которых есть сбор в статусе «Идёт сбор»" Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <DataGrid x:Name="ItemsGrid" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding ContactEmail}" Width="1.5*"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding ContactPhone}" Width="*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="1.5*"/>
+                <DataGridTextColumn Header="Сборов" Binding="{Binding Campaign.Count, Mode=OneWay}" Width="80"/>
+                <DataGridTemplateColumn Width="130">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Style="{StaticResource SmallButton}" ToolTip="Редактировать запись" Click="EditButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Добавить" ToolTip="Создать новую запись" Click="AddButton_Click"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" ToolTip="Удалить выделенные строки (несколько — с зажатым Ctrl)" Click="DeleteButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

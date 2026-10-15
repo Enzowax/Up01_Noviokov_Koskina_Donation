@@ -5,7 +5,7 @@ namespace Up01_Noviokov_Koskina_Donation.Services
 {
     public static class Check
     {
-        public static bool IsEnail(string text)
+        public static bool IsEmail(string text)
         {
             return Regex.IsMatch(text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }

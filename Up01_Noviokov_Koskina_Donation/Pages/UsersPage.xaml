@@ -6,9 +6,56 @@
       xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UsersPage">
+      Title="Пользователи" Style="{DynamicResource PageStyle}" IsVisibleChanged="Page_IsVisibleChanged">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        
+        <WrapPanel Grid.Row="0">
+            <Grid Width="300">
+                <TextBox x:Name="SearchBox" ToolTip="Поиск по ФИО или логину" TextChanged="Filter_Changed"/>
+                <TextBlock x:Name="SearchHint" Text="ФИО или логин..." Style="{StaticResource HintText}"/>
+            </Grid>
+            <ComboBox x:Name="RoleFilterBox" Width="200" SelectedIndex="0" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Все роли" Tag=""/>
+                <ComboBoxItem Content="Пользователи" Tag="User"/>
+                <ComboBoxItem Content="Администраторы" Tag="Admin"/>
+            </ComboBox>
+            <ComboBox x:Name="SortBox" Width="200" SelectedIndex="0" ToolTip="Порядок сортировки" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="По ФИО (А-Я)"/>
+                <ComboBoxItem Content="По ФИО (Я-А)"/>
+                <ComboBoxItem Content="По логину"/>
+            </ComboBox>
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <DataGrid x:Name="ItemsGrid" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Фото" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Photo}" Width="40" Height="40" Stretch="UniformToFill"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FIO}" Width="2*"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding RoleText, Mode=OneWay}" Width="*"/>
+                <DataGridTextColumn Header="Пожертвований" Binding="{Binding Payment.Count, Mode=OneWay}" Width="130"/>
+                <DataGridTemplateColumn Width="130">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Style="{StaticResource SmallButton}" ToolTip="Редактировать запись" Click="EditButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Добавить" ToolTip="Создать нового пользователя" Click="AddButton_Click"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" ToolTip="Удалить выделенные строки (несколько - с зажатым Ctrl)"/>
+        </StackPanel>
     </Grid>
 </Page>
