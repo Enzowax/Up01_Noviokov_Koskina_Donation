@@ -335,6 +335,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
+    <Content Include="db\Donation.sql" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
