@@ -23,7 +23,40 @@
                 <ComboBoxItem Content="Все статусы" Tag=""/>
                 <ComboBoxItem Content="Черновик" Tag="Draft"/>
                 <ComboBoxItem Content="Идёт сбор" Tag="Active"/>
+                <ComboBoxItem Content="Завершён" Tag="Closed"/>
+                <ComboBoxItem Content="Отменён" Tag="Cancelled"/>
             </ComboBox>
+            <ComboBox x:Name="CategoryFilterBox" Width="230" DisplayMemberPath="Name" ToolTip="Фильтр по категории" SelectionChanged="Filter_Changed"/>
+            <ComboBox x:Name="SortBox" Width="220" SelectedIndex="0" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="По названию (А-Я)"/>
+                <ComboBoxItem Content="Сначала новые"/>
+                <ComboBoxItem Content="По цели (по убыванию)"/>
+                <ComboBoxItem Content="По прогрессу (по убыванию)"/>
+            </ComboBox>
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="10,0"/>
         </WrapPanel>
+        <DataGrid x:Name="ItemsGrid" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Организация" Binding="{Binding Organization.Name}" Width="1.5*"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category.Name}" Width="1.5*"/>
+                <DataGridTextColumn Header="Цель, ₽" Binding="{Binding TargetAmount, StringFormat=N2}" Width="*"/>
+                <DataGridTextColumn Header="Собрано, ₽" Binding="{Binding CollectedAmount, Mode=OneWay, StringFormat=N2}" Width="*"/>
+                <DataGridTextColumn Header="%" Binding="{Binding Progress, Mode=OneWay, StringFormat={}{0:N0}%}" Width="55"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding StatusText, Mode=OneWay}" Width="*"/>
+                <DataGridTextColumn Header="Сроки" Binding="{Binding PeriodText, Mode=OneWay}" Width="1.5*"/>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Style="{StaticResource SmallButton}" ToolTip="Редактировать запись" Click="EditButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Добавить" ToolTip="Создать новый сбор" Click="AddButton_Click"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" ToolTip="Удалить выделенные строки (несколько - с зажатым Ctrl)" Click="DeleteButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
