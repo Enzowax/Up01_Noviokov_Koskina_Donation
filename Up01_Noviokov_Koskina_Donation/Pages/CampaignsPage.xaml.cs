@@ -29,7 +29,7 @@ namespace Up01_Noviokov_Koskina_Donation.Pages
             CategoryFilterBox.ItemsSource = categories;
             CategoryFilterBox.SelectedIndex = 0;
         }
-        private void Page_IsVisibleChanged(object sender, RoutedEventArgs e)
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (IsVisible)
                 UpdateList();
@@ -67,9 +67,8 @@ namespace Up01_Noviokov_Koskina_Donation.Pages
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CampaignEditPage());
+            NavigationService.Navigate(new CampaignEditPage(null));
         }
-
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             var item = (sender as Button).DataContext as Campaign;

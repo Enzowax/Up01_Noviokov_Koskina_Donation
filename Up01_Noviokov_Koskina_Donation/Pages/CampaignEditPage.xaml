@@ -6,9 +6,56 @@
       xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CampaignEditPage">
-
-    <Grid>
-        
-    </Grid>
+      Title="Сборы" Style="{DynamicResource PageStyle}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource PanelBorder}" Width="600" Margin="0,20" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{StaticResource TitleText}"/>
+                <TextBlock Text="Организация *" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="OrganizationBox" DisplayMemberPath="Name" SelectedValuePath="ID" ToolTip="Организация, которая проводит сбор"/>
+                <TextBlock Text="Категория *" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="CategoryBox" DisplayMemberPath="Name" SelectedValuePath="ID" ToolTip="Направление помощи"/>
+                <TextBlock Text="Название *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="NameBox" MaxLength="150" ToolTip="До 150 символов"/>
+                    <TextBlock x:Name="NameHint" Text="Например, Школьные наборы для детей" Style="{StaticResource HintText}"/>
+                </Grid>
+                <TextBlock Text="Описание *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="DescriptionBox" MaxLength="2000" Height="100" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" TextChanged="Field_Changed" ToolTip="На что собираются деньги, до 2000 символов"/>
+                    <TextBlock x:Name="DescriptionHint" Text="На что собираются средства" Style="{StaticResource HintText}" VerticalAlignment="Top" Margin="12,10,0,0"/>
+                </Grid>
+                <TextBlock Text="Целевая сумма, ₽ *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="TargetBox" MaxLength="13" TextChanged="Field_Changed" ToolTip="От 0,01 до 1 000 000 000. Дробная часть — через запятую"/>
+                    <TextBlock x:Name="TargetHint" Text="Например, 50000" Style="{StaticResource HintText}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Дата начала *" Style="{StaticResource FieldLabel}"/>
+                        <DatePicker x:Name="StartDatePicker" ToolTip="Когда начинаеться сбор"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Дата окончания" Style="{StaticResource FieldLabel}"/>
+                        <DatePicker x:Name="EndDatePicker" ToolTip="Необязательно. Не раньше даты начала"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Text="Статус *" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="StatusBox" SelectedValuePath="Tag" ToolTip="Черновики не видны пользователям в каталоге">
+                    <ComboBoxItem Content="Черновик" Tag="Draft"/>
+                    <ComboBoxItem Content="Идёт сбор" Tag="Active"/>
+                    <ComboBoxItem Content="Завершён" Tag="Closed"/>
+                    <ComboBoxItem Content="Отменён" Tag="Cancelled"/>
+                </ComboBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Сохранить" ToolTip="Сохранить и вернуться к списку" Click="SaveButton_Click"/>
+                    <Button Content="Отмена" ToolTip="Вернуться без сохранения" Click="CancelButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
 </Page>
