@@ -1,0 +1,71 @@
+﻿<Page x:Class="Up01_Noviokov_Koskina_Donation.Pages.CampaignDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Сбор"
+      Style="{DynamicResource PageStyle}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource PanelBorder}" Width="760" Margin="0,20"
+                HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel TextElement.Foreground="{DynamicResource TextBrush}">
+                <TextBlock x:Name="NameText" Style="{StaticResource TitleText}" TextWrapping="Wrap"/>
+                <TextBlock x:Name="CategoryText" Foreground="{DynamicResource AccentBrush}" Margin="5,0"/>
+                <TextBlock x:Name="OrganizationText" FontSize="13" Margin="5,2"/>
+                <TextBlock x:Name="DescriptionText" TextWrapping="Wrap" Margin="5,12"/>
+
+                <ProgressBar x:Name="CampaignProgress" Maximum="100" Margin="5,0"/>
+                <TextBlock x:Name="ProgressText" Margin="5,4" TextWrapping="Wrap"/>
+                <TextBlock x:Name="StatusLine" FontWeight="SemiBold" Margin="5,0"/>
+                <TextBlock x:Name="SpentText" Margin="5,4"/>
+
+                <TextBlock Text="Отчёты о расходах" Style="{StaticResource FieldLabel}" Margin="5,15,5,0"/>
+                <DataGrid x:Name="ReportsGrid" AutoGenerateColumns="False" IsReadOnly="True" MaxHeight="200">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="90"/>
+                        <DataGridTextColumn Header="На что потрачено" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Потрачено, ₽" Binding="{Binding SpentAmount, StringFormat=N2}" Width="130"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock x:Name="NoReportsText" Text="Отчётов о расходах пока нет." Margin="5,4"/>
+
+                <TextBlock Text="Последние пожертвования" Style="{StaticResource FieldLabel}" Margin="5,15,5,0"/>
+                <DataGrid x:Name="PaymentsGrid" AutoGenerateColumns="False" IsReadOnly="True" MaxHeight="200">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="90"/>
+                        <DataGridTextColumn Header="Донор" Binding="{Binding DonorName, Mode=OneWay}" Width="*"/>
+                        <DataGridTextColumn Header="Сумма, ₽" Binding="{Binding Total, Mode=OneWay, StringFormat=N2}" Width="130"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock x:Name="NoPaymentsText" Text="Пожертвований пока нет. Станьте первым!" Margin="5,4"/>
+
+                <StackPanel x:Name="DonatePanel" Margin="0,15,0,0">
+                    <TextBlock Text="Сделать пожертвование" Style="{StaticResource FieldLabel}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Grid>
+                                <TextBox x:Name="AmountBox" MaxLength="13" TextChanged="Amount_Changed"
+                                         ToolTip="От 0,01 до 1 000 000 000. Дробная часть — через запятую"/>
+                                <TextBlock x:Name="AmountHint" Text="Сумма, ₽" Style="{StaticResource HintText}"/>
+                            </Grid>
+                        </StackPanel>
+                        <ComboBox x:Name="MethodBox" Grid.Column="1" DisplayMemberPath="Name"
+                                  ToolTip="Способ оплаты"/>
+                    </Grid>
+                    <CheckBox x:Name="AnonymousBox" Content="Скрыть моё имя (анонимное пожертвование)"
+                              Margin="5,8" ToolTip="В списках будет показано «Анонимный донор»"/>
+                    <Button Content="Пожертвовать" HorizontalAlignment="Left"
+                            ToolTip="Отправить пожертвование на этот сбор" Click="DonateButton_Click"/>
+                </StackPanel>
+                <TextBlock x:Name="ClosedText" Text="Этот сбор сейчас не принимает пожертвования."
+                           FontWeight="SemiBold" Margin="5,15" Visibility="Collapsed"/>
+
+                <Button Content="К каталогу" HorizontalAlignment="Right" Margin="0,15,0,0"
+                        ToolTip="Вернуться к списку сборов" Click="BackButton_Click"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

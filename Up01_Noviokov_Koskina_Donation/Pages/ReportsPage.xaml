@@ -1,14 +1,55 @@
 ﻿<Page x:Class="Up01_Noviokov_Koskina_Donation.Pages.ReportsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReportsPage">
+      Title="Отчёты о расходах"
+      Style="{DynamicResource PageStyle}"
+      IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid>
-        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0">
+            <Grid Width="280">
+                <TextBox x:Name="SearchBox" ToolTip="Поиск по названию и описанию расхода" TextChanged="Filter_Changed"/>
+                <TextBlock x:Name="SearchHint" Text="Название или описание..." Style="{StaticResource HintText}"/>
+            </Grid>
+            <ComboBox x:Name="CampaignFilterBox" Width="280" DisplayMemberPath="Name"
+                      ToolTip="Фильтр по сбору" SelectionChanged="Filter_Changed"/>
+            <ComboBox x:Name="SortBox" Width="200" SelectedIndex="0"
+                      ToolTip="Порядок сортировки" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Сначала новые"/>
+                <ComboBoxItem Content="Сначала старые"/>
+                <ComboBoxItem Content="По сумме (по убыванию)"/>
+            </ComboBox>
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+
+        <DataGrid x:Name="ItemsGrid" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="90"/>
+                <DataGridTextColumn Header="Сбор" Binding="{Binding Campaign.Name}" Width="2*"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="2*"/>
+                <DataGridTextColumn Header="Потрачено, ₽" Binding="{Binding SpentAmount, StringFormat=N2}" Width="*"/>
+                <DataGridTextColumn Header="Файл" Binding="{Binding FilePath}" Width="1.5*"/>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Style="{StaticResource SmallButton}"
+                                    ToolTip="Редактировать запись" Click="EditButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Добавить" ToolTip="Добавить отчёт о расходе" Click="AddButton_Click"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}"
+                    ToolTip="Удалить выделенные строки (несколько — с зажатым Ctrl)" Click="DeleteButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

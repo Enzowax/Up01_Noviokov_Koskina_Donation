@@ -1,28 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Up01_Noviokov_Koskina_Donation.Services;
 
 namespace Up01_Noviokov_Koskina_Donation.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для PaymentMethodEditPage.xaml
-    /// </summary>
     public partial class PaymentMethodEditPage : Page
     {
-        public PaymentMethodEditPage()
+        private readonly PaymentMethod _item;
+
+        public PaymentMethodEditPage(PaymentMethod item)
         {
             InitializeComponent();
+            _item = item;
+
+            if (_item == null)
+            {
+                Title = "Новый способ оплаты";
+            }
+            else
+            {
+                Title = "Редактирование способа оплаты";
+                NameBox.Text = _item.Name;
+            }
+        }
+
+        private void Field_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NameHint.Visibility = NameBox.Text.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = NameBox.Text.Trim();
+            int id = _item != null ? _item.ID : 0;
+
+            if (name == "")
+            {
+                Messages.Warning("Введите название способа оплаты");
+                return;
+            }
+
+            bool exists = Entities.GetContext().PaymentMethod.Any(c => c.Name == name && c.ID != id);
+            if (exists)
+            {
+                Messages.Warning("Способ оплаты с таким названием уже существует");
+                return;
+            }
+
+            bool isNew = _item == null;
+            PaymentMethod paymentMethod = isNew ? new PaymentMethod() : _item;
+            paymentMethod.Name = name;
+
+            if (DataHelper.Save(paymentMethod, isNew))
+                NavigationService.GoBack();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

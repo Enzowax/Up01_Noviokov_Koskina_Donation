@@ -9,7 +9,7 @@
       Title="Панель администратора" Style="{DynamicResource PageStyle}">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock x:Name="HelloText" Style="{StaticResource TitleText}" HorizontalAlignment="Center"/>
-        <TextBlock Text="Выберие раздел для работы" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="{DynamicResource SecondaryTextBrush}"/>
+        <TextBlock Text="Выберите раздел для работы" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="{DynamicResource SecondaryTextBrush}"/>
         <UniformGrid Columns="3">
             <Button Content="Пользователи" Tag="Users" Style="{StaticResource MenuButton}" ToolTip="Учётные записи и роли" Click="Menu_Click"/>
             <Button Content="Организации" Tag="Organizations" Style="{StaticResource MenuButton}" ToolTip="Благотворительные организации" Click="Menu_Click"/>

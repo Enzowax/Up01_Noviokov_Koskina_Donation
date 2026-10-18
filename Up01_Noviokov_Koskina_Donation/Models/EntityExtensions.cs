@@ -96,7 +96,7 @@ namespace Up01_Noviokov_Koskina_Donation
     {
         public string RoleText
         {
-            get { return Role == "Admin" ? "Администартор" : "Пользователь"; }
+            get { return Role == "Admin" ? "Администратор" : "Пользователь"; }
         }
     }
 }

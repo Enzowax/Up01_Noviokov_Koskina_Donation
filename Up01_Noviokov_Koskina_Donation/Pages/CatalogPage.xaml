@@ -1,14 +1,76 @@
 ﻿<Page x:Class="Up01_Noviokov_Koskina_Donation.Pages.CatalogPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CatalogPage">
+      Title="Каталог сборов"
+      Style="{DynamicResource PageStyle}"
+      IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid>
-        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0">
+            <Grid Width="260">
+                <TextBox x:Name="SearchBox" ToolTip="Поиск по названию и описанию сбора" TextChanged="Filter_Changed"/>
+                <TextBlock x:Name="SearchHint" Text="Найти сбор..." Style="{StaticResource HintText}"/>
+            </Grid>
+            <ComboBox x:Name="CategoryFilterBox" Width="220" DisplayMemberPath="Name"
+                      ToolTip="Категория помощи" SelectionChanged="Filter_Changed"/>
+            <ComboBox x:Name="OrganizationFilterBox" Width="220" DisplayMemberPath="Name"
+                      ToolTip="Организатор сбора" SelectionChanged="Filter_Changed"/>
+            <ComboBox x:Name="SortBox" Width="220" SelectedIndex="0"
+                      ToolTip="Порядок сортировки" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="По названию"/>
+                <ComboBoxItem Content="По прогрессу (больше собрано)"/>
+                <ComboBoxItem Content="По цели (по возрастанию)"/>
+                <ComboBoxItem Content="По цели (по убыванию)"/>
+                <ComboBoxItem Content="Скоро завершатся"/>
+            </ComboBox>
+            <CheckBox x:Name="ActiveOnlyBox" Content="Только идущие сборы"
+                      ToolTip="Скрыть завершённые и отменённые"
+                      Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+            <Button Content="Сбросить" Style="{StaticResource SmallButton}"
+                    ToolTip="Очистить поиск и фильтры" Click="ResetButton_Click"/>
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+
+        <Grid Grid.Row="1">
+            <ListView x:Name="CampaignsList" Background="Transparent" BorderThickness="0"
+                      SelectionMode="Single" SelectionChanged="CampaignsList_SelectionChanged"
+                      ToolTip="Нажмите на карточку, чтобы открыть сбор"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource PanelBorder}" Width="300" Padding="15" Margin="5">
+                            <StackPanel TextElement.Foreground="{DynamicResource TextBrush}">
+                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Category.Name}" Foreground="{DynamicResource AccentBrush}" Margin="0,4,0,0"/>
+                                <TextBlock Text="{Binding Organization.Name}" FontSize="12"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                           MaxHeight="58" Margin="0,8" FontSize="13"/>
+                                <ProgressBar Value="{Binding Progress, Mode=OneWay}" Maximum="100"/>
+                                <TextBlock Text="{Binding ProgressText, Mode=OneWay}" FontSize="12" TextWrapping="Wrap"/>
+                                <TextBlock FontSize="12" Margin="0,4,0,0">
+                                    <Run Text="{Binding StatusText, Mode=OneWay}" FontWeight="SemiBold"/>
+                                    <Run Text=" · "/>
+                                    <Run Text="{Binding PeriodText, Mode=OneWay}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBlock x:Name="EmptyText" Text="Ничего не найдено. Измените условия поиска."
+                       FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
+        </Grid>
     </Grid>
 </Page>

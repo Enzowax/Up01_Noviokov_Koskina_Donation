@@ -1,14 +1,66 @@
 ﻿<Page x:Class="Up01_Noviokov_Koskina_Donation.Pages.ReportEditPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Up01_Noviokov_Koskina_Donation.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReportEditPage">
+      Title="Отчёт"
+      Style="{DynamicResource PageStyle}">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource PanelBorder}" Width="600" Margin="0,20"
+                HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{StaticResource TitleText}"/>
+
+                <TextBlock Text="Сбор *" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="CampaignBox" DisplayMemberPath="Name" SelectedValuePath="ID"
+                          ToolTip="Сбор, деньги которого потрачены"/>
+
+                <TextBlock Text="Дата *" Style="{StaticResource FieldLabel}"/>
+                <DatePicker x:Name="ReportDatePicker" ToolTip="Дата расхода, не позже сегодня"/>
+
+                <TextBlock Text="Название *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="NameBox" MaxLength="150" TextChanged="Field_Changed"
+                             ToolTip="На что потрачены деньги, до 150 символов"/>
+                    <TextBlock x:Name="NameHint" Text="Например, Закупка рюкзаков" Style="{StaticResource HintText}"/>
+                </Grid>
+
+                <TextBlock Text="Описание *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="DescriptionBox" MaxLength="2000" Height="90"
+                             TextWrapping="Wrap" AcceptsReturn="True"
+                             VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto"
+                             TextChanged="Field_Changed" ToolTip="Подробности расхода, до 2000 символов"/>
+                    <TextBlock x:Name="DescriptionHint" Text="Что куплено, сколько, для кого"
+                               Style="{StaticResource HintText}" VerticalAlignment="Top" Margin="12,10,0,0"/>
+                </Grid>
+
+                <TextBlock Text="Потрачено, ₽ *" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <TextBox x:Name="SpentBox" MaxLength="13" TextChanged="Field_Changed"
+                             ToolTip="От 0,01 до 1 000 000 000. Дробная часть — через запятую"/>
+                    <TextBlock x:Name="SpentHint" Text="Например, 3000" Style="{StaticResource HintText}"/>
+                </Grid>
+
+                <TextBlock Text="Файл с документами (чек, акт)" Style="{StaticResource FieldLabel}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="FilePathBox" Grid.Column="0" IsReadOnly="True"
+                             ToolTip="Необязательно. Выберите файл кнопкой «Обзор»"/>
+                    <Button Grid.Column="1" Content="Обзор..." Style="{StaticResource SmallButton}"
+                            ToolTip="Выбрать файл" Click="BrowseButton_Click"/>
+                    <Button Grid.Column="2" Content="Очистить" Style="{StaticResource SmallButton}"
+                            ToolTip="Убрать файл" Click="ClearFileButton_Click"/>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Сохранить" ToolTip="Сохранить и вернуться к списку" Click="SaveButton_Click"/>
+                    <Button Content="Отмена" ToolTip="Вернуться без сохранения" Click="CancelButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
 </Page>
