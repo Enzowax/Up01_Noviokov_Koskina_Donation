@@ -21,7 +21,7 @@
                     <TextBox x:Name="FioBox" MaxLength="150" TextChanged="Field_Changed" ToolTip="Фамилия, имя и отчество через пробел (только буквы)"/>
                     <TextBlock x:Name="FioHint" Text="Иванов Иван Иванович" Style="{StaticResource HintText}"/>
                 </Grid>
-                <TextBlock Text="Паровль *" Style="{StaticResource FieldLabel}"/> 
+                <TextBlock Text="Пароль *" Style="{StaticResource FieldLabel}"/> 
                 <Grid>
                     <PasswordBox x:Name="PasswordBox" MaxLength="50" PasswordChanged="Field_Changed" ToolTip="Не менее 6 символов, латинские буквы и хотябы одна цифра"/>
                     <TextBlock x:Name="PasswordHint" Text="Не менее 6 символов" Style="{StaticResource HintText}"/>
