@@ -328,6 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icon.ico" />
+    <Resource Include="Images\Logo.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
