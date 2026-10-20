@@ -55,7 +55,7 @@
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Добавить" ToolTip="Создать нового пользователя" Click="AddButton_Click"/>
-            <Button Content="Удалить" Style="{StaticResource DangerButton}" ToolTip="Удалить выделенные строки (несколько - с зажатым Ctrl)"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" ToolTip="Удалить выделенные строки (несколько - с зажатым Ctrl)" Click="DeleteButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>
